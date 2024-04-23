@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BankDomain.Model.Currency>
+
+@{
+    ViewData["Title"] = "Валюти у банку";
+}
+
+<h1>Валюти у банку  @ViewBag.BankName</h1>
+
+<p>
+    @* <a asp-action="Create" asp-route-id="@ViewBag.BankId">Додати нову валюту до банку</a> *@
+    @Html.ActionLink("Додати нову валюту", "Create", new { bankId = ViewBag.BankId })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bank)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrencyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrencyRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bank.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
